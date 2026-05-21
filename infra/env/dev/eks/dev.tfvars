@@ -22,7 +22,7 @@ eks-cluster-sg-name        = "eks-cluster-sg"
 # eks variables
 is_eks_cluster_enabled     = true
 cluster_version            = "1.35"
-cluster_name               = "eks-devsecops-cluster"
+cluster_name               = "gitops-cluster"
 endpoint_private_access    = true
 endpoint_public_access     = false
 ondemand_instance_types    = ["m7i-flex.large"]
