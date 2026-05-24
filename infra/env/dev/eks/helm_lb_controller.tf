@@ -23,7 +23,7 @@ resource "helm_release" "aws_load_balancer_controller" {
       value = var.aws_region
     },
     {
-      name  = "vpcIds"
+      name  = "vpcId"
       value = module.eks.vpc_id
     }
   ]

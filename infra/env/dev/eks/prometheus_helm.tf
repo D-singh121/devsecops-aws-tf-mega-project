@@ -19,7 +19,7 @@ resource "helm_release" "prometheus" {
     },
     {
       name  = "prometheus.service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-type"
-      value = "nlb"
+      value = "external"
     },
     {
       name  = "prometheus.service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-scheme"

@@ -69,6 +69,7 @@ resource "aws_subnet" "private-subnet" {
     Name                                          = "${var.private-subnet-name}-${count.index}"
     environment                                   = var.environment
     "kubernetes.io/cluster/${local.cluster-name}" = "owned"
+    "kubernetes.io/role/internal-elb"             = "1"
   }
 
   depends_on = [

@@ -1,11 +1,16 @@
+resource "random_integer" "lb_role_suffix_v2" {
+  min = 1000
+  max = 9999
+}
+
 resource "aws_iam_policy" "lb_controller_policy" {
-  name   = "AWSLoadBalancerControllerIAMPolicy"
+  name   = "aws-lb-policy-${local.env}-${local.org}-${var.cluster_name}-${random_integer.lb_role_suffix_v2.result}"
   policy = file("./iam_policy.json")
 }
 
 
 resource "aws_iam_role" "k8s_lb_controller_role" {
-  name = "AWSLoadBalancerControllerRole"
+  name = "aws-lb-role-${local.env}-${local.org}-${var.cluster_name}-${random_integer.lb_role_suffix_v2.result}"
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
@@ -45,6 +50,11 @@ resource "kubernetes_service_account_v1" "lb_controller_service_account" {
     }
   }
   depends_on = [kubernetes_namespace_v1.lb_controller_namespace]
+}
+
+import {
+  to = kubernetes_service_account_v1.lb_controller_service_account
+  id = "aws-load-balancer-controller-ns/aws-load-balancer-controller-svc"
 }
 
 

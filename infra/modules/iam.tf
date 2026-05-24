@@ -96,7 +96,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEBSCSIDriverPolicy" {
 
 resource "aws_iam_role" "eks_oidc" {
   assume_role_policy = data.aws_iam_policy_document.eks_oidc_assume_role_policy.json
-  name               = "eks-oidc-provider"
+  name               = "eks-oidc-provider-${local.cluster_name}-${random_integer.random-suffix.result}"
 }
 
 data "aws_iam_policy_document" "ebs_csi_assume_role_policy" {
@@ -118,7 +118,7 @@ data "aws_iam_policy_document" "ebs_csi_assume_role_policy" {
 }
 
 resource "aws_iam_role" "ebs_csi_role" {
-  name               = "${local.cluster_name}-ebs-csi-role"
+  name               = "${local.cluster_name}-ebs-csi-role-${random_integer.random-suffix.result}"
   assume_role_policy = data.aws_iam_policy_document.ebs_csi_assume_role_policy.json
 }
 

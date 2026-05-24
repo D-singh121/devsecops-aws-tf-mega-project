@@ -13,7 +13,7 @@ resource "helm_release" "argocd" {
     # AWS NLB
     {
       name  = "server.service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-type"
-      value = "nlb"
+      value = "external"
     },
 
     # Internet Facing
